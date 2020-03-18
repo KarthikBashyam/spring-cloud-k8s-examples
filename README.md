@@ -16,3 +16,12 @@ docker images
 docker tag <image-id> bashdocker/service-b:latest
   
 docker push bashdocker/service-b:latest
+
+
+docker build . -t application-gateway:latest
+
+docker images
+
+docker tag <image-id> bashdocker/application-gateway:latest
+  
+docker push bashdocker/application-gateway:latest
