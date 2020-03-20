@@ -1,0 +1,17 @@
+version: '2'
+services:
+    application-gateway:
+        build:
+            context: ./application-gateway
+            dockerfile: Dockerfile
+        image: 'bashdocker/application-gateway:latest'
+    service-a:
+        build:
+            context: ./service-a
+            dockerfile: Dockerfile
+        image: 'bashdocker/service-a:latest'
+    service-b:
+        build:
+            context: ./service-b
+            dockerfile: Dockerfile
+        image: 'bashdocker/service-b:latest'
