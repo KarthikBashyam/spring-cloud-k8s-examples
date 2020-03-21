@@ -10,5 +10,10 @@ public class HelloController {
 	public String hello() {
 		return "Hello from service-a";
 	}
+	
+	@GetMapping(path = "/")
+	public String welcome() {
+		return "Welcome from service-a";
+	}
 
 }

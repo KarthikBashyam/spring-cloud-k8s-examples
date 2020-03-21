@@ -25,3 +25,6 @@ docker images
 docker tag <image-id> bashdocker/application-gateway:latest
   
 docker push bashdocker/application-gateway:latest
+
+
+kubectl create clusterrolebinding admin --clusterrole=cluster-admin --serviceaccount=default:default
