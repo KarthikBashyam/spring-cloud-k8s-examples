@@ -12,15 +12,25 @@ repositories {
 	mavenCentral()
 }
 
+ext {
+  set('springCloudVersion', "Hoxton.SR3")
+}
+
 dependencies {
 	implementation 'org.springframework.boot:spring-boot-starter-actuator'
 	implementation 'org.springframework.boot:spring-boot-starter-web'
 	compile group: 'org.springframework.cloud', name: 'spring-cloud-starter-kubernetes', version: '1.1.2.RELEASE'
-	compile group: 'org.springframework.cloud', name: 'spring-cloud-starter-kubernetes-ribbon', version: '1.1.1.RELEASE'
+	implementation 'org.springframework.cloud:spring-cloud-starter-loadbalancer'
 	compile group: 'org.springframework.cloud', name: 'spring-cloud-starter-kubernetes-config', version: '1.1.2.RELEASE'
 	testImplementation('org.springframework.boot:spring-boot-starter-test') {
 		exclude group: 'org.junit.vintage', module: 'junit-vintage-engine'
 	}
+}
+
+dependencyManagement {
+  imports {
+    mavenBom "org.springframework.cloud:spring-cloud-dependencies:${springCloudVersion}"
+  }
 }
 
 test {
