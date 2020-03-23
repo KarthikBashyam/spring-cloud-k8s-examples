@@ -11,7 +11,6 @@ import org.springframework.cloud.client.discovery.EnableDiscoveryClient;
 import org.springframework.cloud.gateway.route.RouteLocator;
 import org.springframework.cloud.gateway.route.builder.RouteLocatorBuilder;
 import org.springframework.context.annotation.Bean;
-import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 @SpringBootApplication
@@ -41,14 +40,8 @@ public class ApplicationGatewayMain {
 		return args -> {
 			logger.info("============= STARTED GATEWAY LIST SERVICES================");
 			discoveryClient.getServices().forEach(s -> logger.info(s));
-/*			List<ServiceInstance> instances = discoveryClient.getInstances("service-a-service");		
-			instances.forEach(i -> logger.info(i.getHost() + ":" + i.getPort()));*/
 		};
 	}
 	
-	@GetMapping(path="/fallback")
-	public String fallback() {
-		return "Failed to call service...";
-	}
 	
 }

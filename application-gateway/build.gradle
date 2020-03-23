@@ -22,6 +22,7 @@ dependencies {
 	implementation 'org.springframework.cloud:spring-cloud-starter-loadbalancer'
 	implementation 'org.springframework.cloud:spring-cloud-starter-gateway'	
     compile group: 'org.springframework.cloud', name: 'spring-cloud-starter-kubernetes', version: '1.1.2.RELEASE'
+    compile group: 'org.springframework.cloud', name: 'spring-cloud-starter-kubernetes-config', version: '1.1.2.RELEASE'
 	testImplementation('org.springframework.boot:spring-boot-starter-test') {
 		exclude group: 'org.junit.vintage', module: 'junit-vintage-engine'
 	}
