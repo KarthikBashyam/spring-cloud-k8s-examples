@@ -1,6 +1,6 @@
 FROM gradle:jdk10 AS builder
 COPY --chown=gradle:gradle . /home/gradle/src
-ADD --chown=gradle . /home/gradle
+ADD --chown=gradle . /home/gradle/
 WORKDIR /home/gradle/src
 RUN chmod 777 /home/gradle
 RUN gradle build
