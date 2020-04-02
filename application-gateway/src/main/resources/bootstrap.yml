@@ -1,0 +1,32 @@
+spring:
+  security:
+    oauth2:
+       client:
+         registration:
+            app-gateway-client:
+              provider: okta
+              client-id: 0oa3euc6auTf8zpyd357
+              client-secret: Gpy-9bNglKkoFQFezsBRWwEy5Z_UMOyNqlgvpnLB
+              redirect-uri: http://localhost:8080/login/oauth2/code/app-gateway-client             
+              scope: openid,profile,email, authority-a, authority-b
+              authorization-grant-type: authorization_code
+            client-a:
+              provider: okta
+              client-id: 0oa1jfzariLjBcc4m357
+              client-secret: sQA-_vU2OhMdKFF75YaOq0WQRDhRsUnnhQITuo9_
+              redirect-uri: http://localhost:8080/service-a
+              scope: authority-a
+              authorization-grant-type: authorization_code
+            client-b:
+              provider: okta
+              client-id: 0oa1jfzjy5sOswTPo357
+              client-secret: toUkUKnH63OgLvlG43jhgAWvHWQ7kLsGIr7sQ-Kj
+              redirect-uri: http://localhost:8080/service-b
+              scope: authority-b
+              authorization-grant-type: authorization_code
+         provider:
+           okta:
+             issuer-uri: https://dev-847601.okta.com/oauth2/default
+       resourceserver:  
+         jwt:
+           issuer-uri: https://dev-847601.okta.com/oauth2/default

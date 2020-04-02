@@ -1,15 +1,16 @@
 package com.example.controller;
 
 import java.net.InetAddress;
+import java.security.Principal;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.core.env.Environment;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
+import org.springframework.security.oauth2.server.resource.authentication.JwtAuthenticationToken;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
-import org.springframework.web.client.RestTemplate;
 
 import com.example.config.ApplicationConfig;
 
@@ -24,21 +25,25 @@ public class HelloController {
 	@Autowired
 	private ApplicationConfig config;
 	
-	@Autowired
+	/*@Autowired
 	@Qualifier("loadBalancedRestTemplate")
-	private RestTemplate restTemplate;
+	private RestTemplate restTemplate;*/
 	
 	@GetMapping(path = "/service-a")
-	public String hello() {
+	public String hello(Principal token) {
 		String ip = null;
 		try {
 			ip = InetAddress.getLocalHost().getHostAddress();
 		} catch (Exception e) {
 			LOGGER.error(e.getMessage());
-		}
-		String serviceBResponse = restTemplate.getForObject("lb://service-b-service/service-b", String.class);
-		LOGGER.info("Response from SERVICE-B to SERVICE-A :"+serviceBResponse);
-		return "Hello from service-a:" + config.getName() + ":" + ip;
+		}		
+		return "Hello from service-a:" + token;
 	}
+	
+	@GetMapping(path="/service-a/showjwt") 
+	public JwtAuthenticationToken hello(@AuthenticationPrincipal JwtAuthenticationToken jwt) {
+		return jwt;
+	}
+
 
 }

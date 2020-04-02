@@ -16,10 +16,10 @@ public class ServiceAApplication {
 		SpringApplication.run(ServiceAApplication.class, args);
 	}
 	
-	@Bean
+	/*@Bean
 	@LoadBalanced
 	RestTemplate loadBalancedRestTemplate(RestTemplateBuilder restTemplateBuilder) {
 		return restTemplateBuilder.build();
-	}
+	}*/
 
 }

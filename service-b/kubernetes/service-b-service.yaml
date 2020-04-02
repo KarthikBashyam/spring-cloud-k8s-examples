@@ -10,6 +10,7 @@ spec:
   - port: 8082
     protocol: TCP
     targetPort: 8082
+    nodePort: 30996
   selector:
     app: service-b
   type: NodePort

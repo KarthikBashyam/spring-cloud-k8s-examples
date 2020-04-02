@@ -1,0 +1,7 @@
+apiVersion: v1
+data:
+  app: SPRING_CLOUD_K8S
+kind: ConfigMap
+metadata:
+  creationTimestamp: null
+  name: service-a-config
