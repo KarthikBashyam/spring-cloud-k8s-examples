@@ -1,7 +1,7 @@
 FROM gradle:jdk10 AS builder
 COPY --chown=gradle:gradle . /home/gradle/src
 WORKDIR /home/gradle/src
-RUN chmod 777 /home/gradle/
+RUN chmod 777 /home/gradle
 RUN gradle build
 
 FROM openjdk:8-jdk-alpine
