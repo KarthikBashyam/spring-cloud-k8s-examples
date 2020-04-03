@@ -28,3 +28,7 @@ docker push bashdocker/application-gateway:latest
 
 
 kubectl create clusterrolebinding admin --clusterrole=cluster-admin --serviceaccount=default:default
+
+kubectl create clusterrole deployment-role --verb=* --resource=deployments,deployments.apps
+
+kubectl create clusterrolebinding deployment-binding --clusterrole=deployment-role --serviceaccount=default:spring-boot-service

@@ -11,6 +11,8 @@ spec:
       value: Dockerfile
     - name: pathToContext
       value: /workspace/docker-source/application-gateway/
+    - name: pathToDeployConfig
+      value: /workspace/docker-source/application-gateway/kubernetes/application-gateway-deploy.yaml
   resources:
     inputs:
       - name: docker-source

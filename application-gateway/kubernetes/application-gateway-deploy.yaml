@@ -20,5 +20,6 @@ spec:
       containers:
       - image: bashdocker/application-gateway:latest
         name: application-gateway
+        imagePullPolicy: Always
         resources: {}
 status: {}

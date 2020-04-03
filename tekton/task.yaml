@@ -14,6 +14,10 @@ spec:
         The build context used by Kaniko
         (https://github.com/GoogleContainerTools/kaniko#kaniko-build-contexts)
       default: /workspace/docker-source
+    - name: pathToDeployConfig
+      type: string
+      description: Kubernetes deploy config file
+      default: 
   resources:
     inputs:
       - name: docker-source
@@ -22,15 +26,22 @@ spec:
       - name: builtImage
         type: image
   steps:
-    - name: build-and-push
-      image: gcr.io/kaniko-project/executor:v0.17.1
-      # specifying DOCKER_CONFIG is required to allow kaniko to detect docker credential
-      env:
-        - name: "DOCKER_CONFIG"
-          value: "/tekton/home/.docker/"
-      command:
-        - /kaniko/executor
+   # - name: build-and-push
+   #   image: gcr.io/kaniko-project/executor:v0.17.1
+   #   env:
+   #     - name: "DOCKER_CONFIG"
+   #       value: "/tekton/home/.docker/"
+   #   command:
+   #     - /kaniko/executor
+   #   args:
+   #     - --dockerfile=$(params.pathToDockerFile)
+   #     - --destination=$(resources.outputs.builtImage.url)
+   #     - --context=$(params.pathToContext)
+
+    - name: kube-deploy
+      image: bitnami/kubectl:latest
+      command: ["kubectl"]
       args:
-        - --dockerfile=$(params.pathToDockerFile)
-        - --destination=$(resources.outputs.builtImage.url)
-        - --context=$(params.pathToContext)
+        - "apply"
+        - "-f"
+        - "$(params.pathToDeployConfig)"
