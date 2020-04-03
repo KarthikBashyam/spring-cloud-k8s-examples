@@ -1,0 +1,35 @@
+apiVersion: tekton.dev/v1beta1
+kind: Pipeline
+metadata:
+  name: spring-boot-k8s-build-and-deploy-pipeline
+spec:  
+  params:
+    - name: pathToDockerFile            
+      default: 
+    - name: pathToContext
+      default:
+    - name: pathToDeployConfig
+      default:
+  resources:
+    - name: docker-source
+      type: git
+    - name: builtImage
+      type: image
+  tasks:
+    - name: build-application-gateway
+      taskRef:
+        name: app-gateway-docker-build-and-deploy
+      params:
+        - name: pathToDockerFile
+          value: Dockerfile
+        - name: pathToContext
+          value: "$(params.pathToContext)"
+        - name: pathToDeployConfig
+          value: "$(params.pathToDeployConfig)"
+      resources:
+        inputs:
+          - name: docker-source
+            resource: docker-source
+        outputs:
+          - name: builtImage
+            resource: builtImage

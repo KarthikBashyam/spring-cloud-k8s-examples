@@ -1,0 +1,22 @@
+apiVersion: tekton.dev/v1beta1
+kind: PipelineRun
+metadata:
+  name: spring-boot-k8s-pipeline-run
+spec:
+  serviceAccountName: spring-boot-service
+  pipelineRef:
+    name: spring-boot-k8s-build-and-deploy-pipeline
+  resources:    
+    - name: docker-source
+      resourceRef:
+        name: application-gateway-git    
+    - name: builtImage
+      resourceRef:
+        name: application-gateway-image
+  params:
+    - name: pathToDockerFile
+      value: DockerFile
+    - name: pathToContext
+      value: /workspace/docker-source/application-gateway/
+    - name: pathToDeployConfig
+      value: /workspace/docker-source/application-gateway/kubernetes/application-gateway-deploy.yaml

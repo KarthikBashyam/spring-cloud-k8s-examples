@@ -1,7 +1,7 @@
 apiVersion: tekton.dev/v1beta1
 kind: Task
 metadata:
-  name: build-docker-image-from-git-source
+  name: app-gateway-docker-build-and-deploy
 spec:
   params:
     - name: pathToDockerFile
@@ -10,9 +10,7 @@ spec:
       default: /workspace/docker-source/Dockerfile
     - name: pathToContext
       type: string
-      description: |
-        The build context used by Kaniko
-        (https://github.com/GoogleContainerTools/kaniko#kaniko-build-contexts)
+      description: The build context used by Kaniko        
       default: /workspace/docker-source
     - name: pathToDeployConfig
       type: string

@@ -1,11 +1,11 @@
 apiVersion: tekton.dev/v1beta1
 kind: TaskRun
 metadata:
-  name: build-docker-image-from-git-source-task-run
+  name: app-gateway-docker-build-and-deploy-task-run
 spec:
   serviceAccountName: spring-boot-service
   taskRef:
-    name: build-docker-image-from-git-source
+    name: app-gateway-docker-build-and-deploy
   params:
     - name: pathToDockerFile
       value: Dockerfile
