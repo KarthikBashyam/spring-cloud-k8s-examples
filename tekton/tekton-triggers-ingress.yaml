@@ -12,5 +12,5 @@ spec:
         paths:
           - path: /
             backend:
-              serviceName: application-gateway-service
+              serviceName: el-github-listener-interceptor
               servicePort: 8080
