@@ -1,6 +1,6 @@
 FROM gradle:jdk8 AS builder
-COPY --chown=gradle:gradle . /home/gradle/src
-ADD --chown=gradle . /home/gradle
+#COPY --chown=gradle:gradle . /home/gradle/src
+#ADD --chown=gradle . /home/gradle
 WORKDIR /home/gradle/src
 RUN gradle clean build
 
