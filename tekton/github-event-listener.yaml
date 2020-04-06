@@ -8,9 +8,9 @@ spec:
     - name: github-trigger
       interceptors:
         - github:       
-            secretRef:
-              secretName: webhook-secret
-              secretKey: token     
+            #secretRef:
+            #  secretName: webhook-secret
+            #  secretKey: token     
             eventTypes:
               - push
       bindings:
