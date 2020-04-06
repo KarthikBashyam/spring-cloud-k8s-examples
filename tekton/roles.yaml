@@ -1,31 +1,32 @@
 apiVersion: rbac.authorization.k8s.io/v1
-kind: Role
+kind: ClusterRole
 metadata:
   name: tekton-triggers-role
+  namespace: default
 rules:
 # Permissions for every EventListener deployment to function
 - apiGroups: ["triggers.tekton.dev"]
   resources: ["eventlisteners", "triggerbindings", "triggertemplates"]
-  verbs: ["get"]
+  verbs: ["get","create"]
 - apiGroups: [""]
   # secrets are only needed for Github/Gitlab interceptors, serviceaccounts only for per trigger authorization
   resources: ["configmaps", "secrets", "serviceaccounts"]
   verbs: ["get", "list", "watch"]
 # Permissions to create resources in associated TriggerTemplates
 - apiGroups: ["tekton.dev"]
-  resources: ["pipelineruns", "pipelineresources", "taskruns"]
+  resources: ["pipelineruns", "pipelineresources", "taskruns","eventlisteners"]
   verbs: ["create"]
 
 ---
 
 apiVersion: rbac.authorization.k8s.io/v1
-kind: RoleBinding
+kind: ClusterRoleBinding
 metadata:
   name: tekton-triggers-rolebinding
   namespace: default # Should be namespace you are granting access to
 roleRef:
   apiGroup: rbac.authorization.k8s.io
-  kind: Role
+  kind: ClusterRole
   name: tekton-triggers-role
 subjects:
 - namespace: source 
