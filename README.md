@@ -32,3 +32,4 @@ kubectl create clusterrolebinding admin --clusterrole=cluster-admin --serviceacc
 kubectl create clusterrole deployment-role --verb=* --resource=deployments,deployments.apps
 
 kubectl create clusterrolebinding deployment-binding --clusterrole=deployment-role --serviceaccount=default:spring-boot-service
+
