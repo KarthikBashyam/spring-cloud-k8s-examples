@@ -7,9 +7,12 @@ spec:
   - name: pathToDockerFile
     description: Docker File
     default: 
-  - name: pathToContext
+  - name: pathToAppGatewayContext
     description:
-  - name: pathToDeployConfig
+  - name: pathToAppGatewayDeployConfig
+    description:
+    default:
+  - name: pathToAppGatewayServiceConfig
     description:
     default:
   - name: contenttype
@@ -33,7 +36,9 @@ spec:
       params:
         - name: pathToDockerFile
           value: DockerFile
-        - name: pathToContext
+        - name: pathToAppGatewayContext
           value: /workspace/docker-source/application-gateway/
-        - name: pathToDeployConfig
+        - name: pathToAppGatewayDeployConfig
           value: /workspace/docker-source/application-gateway/kubernetes/application-gateway-deploy.yaml
+        - name: pathToAppGatewayServiceConfig
+          value: /workspace/docker-source/application-gateway/kubernetes/application-gateway-service.yaml

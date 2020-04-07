@@ -9,10 +9,12 @@ spec:
   params:
     - name: pathToDockerFile
       value: Dockerfile
-    - name: pathToContext
+    - name: pathToAppGatewayContext
       value: /workspace/docker-source/application-gateway/
-    - name: pathToDeployConfig
+    - name: pathToAppGatewayDeployConfig
       value: /workspace/docker-source/application-gateway/kubernetes/application-gateway-deploy.yaml
+    - name: pathToAppGatewayServiceConfig
+      value: /workspace/docker-source/application-gateway/kubernetes/application-gateway-service.yaml
   resources:
     inputs:
       - name: docker-source

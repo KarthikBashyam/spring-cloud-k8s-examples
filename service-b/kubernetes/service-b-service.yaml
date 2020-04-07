@@ -7,9 +7,9 @@ metadata:
   name: service-b-service
 spec:
   ports:
-  - port: 8082
+  - port: 9003
     protocol: TCP
-    targetPort: 8082
+    targetPort: 9003
     nodePort: 30996
   selector:
     app: service-b

@@ -7,9 +7,9 @@ metadata:
   name: service-a-service
 spec:
   ports:
-  - port: 8081
+  - port: 9002
     protocol: TCP
-    targetPort: 8081
+    targetPort: 9002
     nodePort: 31708
   selector:
     app: service-a

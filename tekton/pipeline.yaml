@@ -6,9 +6,11 @@ spec:
   params:
     - name: pathToDockerFile            
       default: 
-    - name: pathToContext
+    - name: pathToAppGatewayContext
       default:
-    - name: pathToDeployConfig
+    - name: pathToAppGatewayDeployConfig
+      default:
+    - name: pathToAppGatewayServiceConfig
       default:
   resources:
     - name: docker-source
@@ -18,14 +20,16 @@ spec:
   tasks:
     - name: build-application-gateway
       taskRef:
-        name: app-gateway-docker-build-and-deploy
+        name: docker-build-and-deploy
       params:
         - name: pathToDockerFile
           value: Dockerfile
         - name: pathToContext
-          value: "$(params.pathToContext)"
+          value: "$(params.pathToAppGatewayContext)"
         - name: pathToDeployConfig
-          value: "$(params.pathToDeployConfig)"
+          value: "$(params.pathToAppGatewayDeployConfig)"
+        - name: pathToServiceConfig
+          value: "$(params.pathToAppGatewayServiceConfig)"
       resources:
         inputs:
           - name: docker-source

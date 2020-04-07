@@ -1,7 +1,7 @@
 apiVersion: tekton.dev/v1beta1
 kind: Task
 metadata:
-  name: app-gateway-docker-build-and-deploy
+  name: docker-build-and-deploy
 spec:
   params:
     - name: pathToDockerFile
@@ -16,6 +16,9 @@ spec:
       type: string
       description: Kubernetes deploy config file
       default: 
+    - name: pathToServiceConfig
+      type: string
+      description: Kubernetes service config file
   resources:
     inputs:
       - name: docker-source
@@ -43,3 +46,5 @@ spec:
         - "apply"
         - "-f"
         - "$(params.pathToDeployConfig)"
+        - "-f"
+        - "$(params.pathToServiceConfig)"
