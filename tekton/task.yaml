@@ -11,14 +11,7 @@ spec:
     - name: pathToContext
       type: string
       description: The build context used by Kaniko        
-      default: /workspace/docker-source
-    - name: pathToDeployConfig
-      type: string
-      description: Kubernetes deploy config file
-      default: 
-    - name: pathToServiceConfig
-      type: string
-      description: Kubernetes service config file
+      default: /workspace/docker-source   
   resources:
     inputs:
       - name: docker-source
@@ -38,13 +31,3 @@ spec:
         - --dockerfile=$(params.pathToDockerFile)
         - --destination=$(resources.outputs.builtImage.url)
         - --context=$(params.pathToContext)
-
-    - name: kube-deploy
-      image: bitnami/kubectl:latest
-      command: ["kubectl"]
-      args:
-        - "apply"
-        - "-f"
-        - "$(params.pathToDeployConfig)"
-        - "-f"
-        - "$(params.pathToServiceConfig)"

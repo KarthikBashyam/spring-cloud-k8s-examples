@@ -9,16 +9,25 @@ spec:
   resources:    
     - name: docker-source
       resourceRef:
-        name: application-gateway-git    
-    - name: builtImage
+        name: spring-boot-k8s-git
+    - name: application-gateway-image
       resourceRef:
-        name: application-gateway-image
+        name: application-gateway-image-resource
+    - name: service-a-image
+      resourceRef:
+        name: service-a-image-resource
   params:
     - name: pathToDockerFile
-      value: DockerFile
+      value: Dockerfile
     - name: pathToAppGatewayContext
       value: /workspace/docker-source/application-gateway/
+    - name: pathToServiceAContext
+      value: /workspace/docker-source/service-a/
     - name: pathToAppGatewayDeployConfig
       value: /workspace/docker-source/application-gateway/kubernetes/application-gateway-deploy.yaml
     - name: pathToAppGatewayServiceConfig
       value: /workspace/docker-source/application-gateway/kubernetes/application-gateway-service.yaml
+    - name: pathToServiceADeployConfig
+      value: /workspace/docker-source/service-a/kubernetes/application-gateway-deploy.yaml
+    - name: pathToServiceAServiceConfig
+      value: /workspace/docker-source/service-a/kubernetes/application-gateway-service.yaml

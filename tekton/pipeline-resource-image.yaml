@@ -1,9 +1,32 @@
 apiVersion: tekton.dev/v1alpha1
 kind: PipelineResource
 metadata:
-  name: application-gateway-image
+  name: application-gateway-image-resource
 spec:
   type: image
   params:
     - name: url
       value: registry.hub.docker.com/bashdocker/application-gateway:latest
+
+---
+
+apiVersion: tekton.dev/v1alpha1
+kind: PipelineResource
+metadata:
+  name: service-a-image-resource
+spec:
+  type: image
+  params:
+    - name: url
+      value: registry.hub.docker.com/bashdocker/service-a:latest
+
+---
+apiVersion: tekton.dev/v1alpha1
+kind: PipelineResource
+metadata:
+  name: service-b-image-resource
+spec:
+  type: image
+  params:
+    - name: url
+      value: registry.hub.docker.com/bashdocker/service-b:latest

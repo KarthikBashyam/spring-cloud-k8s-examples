@@ -8,14 +8,22 @@ spec:
       default: 
     - name: pathToAppGatewayContext
       default:
+    - name: pathToServiceAContext
+      default:
     - name: pathToAppGatewayDeployConfig
       default:
     - name: pathToAppGatewayServiceConfig
       default:
+    - name: pathToServiceADeployConfig
+      default:
+    - name: pathToServiceAServiceConfig
+      default:
   resources:
     - name: docker-source
       type: git
-    - name: builtImage
+    - name: application-gateway-image
+      type: image
+    - name: service-a-image
       type: image
   tasks:
     - name: build-application-gateway
@@ -23,9 +31,40 @@ spec:
         name: docker-build-and-deploy
       params:
         - name: pathToDockerFile
-          value: Dockerfile
+          value: "$(params.pathToDockerFile)"
         - name: pathToContext
           value: "$(params.pathToAppGatewayContext)"
+      resources:
+        inputs:
+          - name: docker-source
+            resource: docker-source
+        outputs:
+          - name: builtImage
+            resource: application-gateway-image
+
+    - name: build-service-a
+      taskRef:
+        name: docker-build-and-deploy
+      params:
+        - name: pathToDockerFile
+          value: "$(params.pathToDockerFile)"
+        - name: pathToContext
+          value: "$(params.pathToServiceAContext)"
+      resources:
+        inputs:
+          - name: docker-source
+            resource: docker-source
+        outputs:
+          - name: builtImage
+            resource: service-a-image
+
+    - name: kube-deployment
+      taskRef:
+        name: kube-deployment
+      runAfter:
+        - build-application-gateway
+        - build-service-a
+      params:
         - name: pathToDeployConfig
           value: "$(params.pathToAppGatewayDeployConfig)"
         - name: pathToServiceConfig
@@ -34,6 +73,3 @@ spec:
         inputs:
           - name: docker-source
             resource: docker-source
-        outputs:
-          - name: builtImage
-            resource: builtImage

@@ -29,13 +29,13 @@ spec:
       resources:    
         - name: docker-source
           resourceRef:
-            name: application-gateway-git    
+            name: spring-boot-k8s-git
         - name: builtImage
           resourceRef:
             name: application-gateway-image
       params:
         - name: pathToDockerFile
-          value: DockerFile
+          value: Dockerfile
         - name: pathToAppGatewayContext
           value: /workspace/docker-source/application-gateway/
         - name: pathToAppGatewayDeployConfig

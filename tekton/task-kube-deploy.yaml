@@ -1,0 +1,27 @@
+apiVersion: tekton.dev/v1beta1
+kind: Task
+metadata:
+  name: kube-deployment
+spec:
+  params:    
+    - name: pathToDeployConfig
+      type: string
+      description: Kubernetes deploy config file
+      default: 
+    - name: pathToServiceConfig
+      type: string
+      description: Kubernetes service config file
+  resources: 
+    inputs:
+        - name: docker-source
+          type: git   
+  steps:   
+    - name: kube-apply-resources
+      image: bitnami/kubectl:latest
+      command: ["kubectl"]
+      args:
+        - "apply"
+        - "-f"
+        - "$(params.pathToDeployConfig)"
+        - "-f"
+        - "$(params.pathToServiceConfig)"

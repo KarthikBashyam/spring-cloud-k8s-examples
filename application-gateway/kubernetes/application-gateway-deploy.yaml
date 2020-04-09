@@ -10,7 +10,8 @@ spec:
   selector:
     matchLabels:
       app: application-gateway-deploy
-  strategy: {}
+  strategy: 
+    type: RollingUpdate 
   template:
     metadata:
       creationTimestamp: null

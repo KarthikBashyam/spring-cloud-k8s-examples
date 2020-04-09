@@ -1,7 +1,7 @@
 apiVersion: tekton.dev/v1alpha1
 kind: PipelineResource
 metadata:
-  name: application-gateway-git
+  name: spring-boot-k8s-git
 spec:
   type: git
   params:
