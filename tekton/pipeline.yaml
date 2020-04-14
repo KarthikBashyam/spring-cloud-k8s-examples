@@ -41,6 +41,7 @@ spec:
         outputs:
           - name: builtImage
             resource: application-gateway-image
+            
     - name: build-service-a
       taskRef:
         name: docker-build-and-deploy
