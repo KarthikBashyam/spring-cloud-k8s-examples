@@ -1,5 +1,7 @@
 # spring-cloud-k8s-examples
 
+use SPRING_CONFIGURATION_NAME environment variable to change the location of application config properties file.
+
 docker build . -t service-a:latest
 
 docker images
